@@ -1,0 +1,17 @@
+<!-- templates/index.html -->
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Healthcare Blockchain</title>
+</head>
+<body>
+    <h1>Healthcare Blockchain - Patient Update</h1>
+    <form action="/update_patient" method="post">
+        <label for="patient_id">Patient ID:</label>
+        <input type="text" id="patient_id" name="patient_id" required><br>
+        <label for="update_message">Update Message:</label>
+        <textarea id="update_message" name="update_message" required></textarea><br>
+        <button type="submit">Submit Update</button>
+    </form>
+</body>
+</html>
