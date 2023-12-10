@@ -33,13 +33,13 @@ def get_contract():
 async def read_root(request: Request):
     return templates.TemplateResponse("index.html", {"request": request})
 
-@app.post("/update_patient")
-async def update_patient(patient_id: Annotated[str, Form()], update_message: Annotated[str, Form()], contract=Depends(get_contract)):
+@app.post("/update_patient",response_class=HTMLResponse)
+async def update_patient(request: Request,patient_id: Annotated[str, Form()], update_message: Annotated[str, Form()], contract=Depends(get_contract)):
     try:
         print(patient_id, update_message)
         tx_hash = contract.functions.updatePatient(patient_id,update_message).transact({'from': w3.eth.accounts[0]})  # Update with your Ethereum account address
         tx_receipt = w3.eth.get_transaction_receipt(tx_hash)
 
-        return {"status": "success", "transaction_hash": tx_hash.hex()}
+        return templates.TemplateResponse("result.html",{"request": request,"status": "success", "result": tx_hash.hex()})
     except Exception as e:
         return {"status": "error", "error_message": str(e)}
