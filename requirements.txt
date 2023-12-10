@@ -1,3 +1,5 @@
 fastapi==0.104.1
 pydantic==1.10.8
 web3==6.11.4
+uvicorn==0.24.0
+python-multipart

@@ -1,0 +1,44 @@
+h1
+{
+    font-family: Arial, Helvetica, sans-serif;
+    text-align: center;
+}
+
+
+label
+{
+    font-family: Helvetica, sans-serif;
+    font-size: 20px;
+    text-align: left;
+}
+
+
+button
+{
+    font-family: Helvetica, sans-serif;
+    font-size: 20px;
+    text-align: center;
+    background-color: #4c59af;
+    color: white;
+    padding: 14px 20px;
+    margin: 8px 0;
+    border: none;
+    cursor: pointer;
+    border-radius: 5px;
+}
+
+
+
+input[type=text], textarea
+{
+    font-family: Helvetica, sans-serif;
+    font-size: 20px;
+    text-align: left;
+    width: 100%;
+    padding: 12px 20px;
+    margin: 8px 0;
+    display: inline-block;
+    border: 1px solid #ccc;
+    box-sizing: border-box;
+    border-radius: 5px;
+}

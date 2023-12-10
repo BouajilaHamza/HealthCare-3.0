@@ -1,16 +1,21 @@
-<!-- templates/index.html -->
 <!DOCTYPE html>
 <html>
-<head>
+    <head>
+    <link href="{{ url_for('static', path='/css/styles.css') }}" rel="stylesheet">
+    <script src="{{ url_for('static', path='/js/script.js') }}"></script>
     <title>Healthcare Blockchain</title>
 </head>
 <body>
     <h1>Healthcare Blockchain - Patient Update</h1>
-    <form action="/update_patient" method="post">
-        <label for="patient_id">Patient ID:</label>
+    <form id="form-id" action="/update_patient" method="post">
+        <label for="patient_id">Patient ID</label>
+        <br>
         <input type="text" id="patient_id" name="patient_id" required><br>
-        <label for="update_message">Update Message:</label>
+        <br>
+        <label for="update_message">Update Message</label>
+        <br>
         <textarea id="update_message" name="update_message" required></textarea><br>
+        <br>
         <button type="submit">Submit Update</button>
     </form>
 </body>
