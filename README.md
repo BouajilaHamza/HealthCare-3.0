@@ -3,8 +3,8 @@ Le patient est supervisé par le réseau médical (à distance). A chaque interv
 
 
 
-#Remix Solidity IDE (https://remix.ethereum.org/)
-## Contarct
+### Remix Solidity IDE (https://remix.ethereum.org/)
+## Smart Contarct
 ```solidity
 // SPDX-License-Identifier: GPL-3.0
 
