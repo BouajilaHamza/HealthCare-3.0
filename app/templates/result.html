@@ -5,7 +5,31 @@
     <script src="{{ url_for('static', path='/js/script.js') }}"></script>
 </head>
 <body>
-    <h1>Healthcare Blockchain - Patient Update</h1>
-    <h2>Update Result</h2>
-    <p>{{ result }}</p>
+    <h1>Healthcare Blockchain - Patient Update - Results</h1>
+   
+
+    <div class="table-responsive-vertical shadow-z-1">
+    <table id="table" class="table table-hover table-mc-light-blue">
+        <thead>
+          <tr>
+            <th> BlockHash </th>
+            <th> BlockNumber </th>
+            <th> TransactionIndex </th>
+            <th> TransactionHash</th>
+            <th> GasUsed</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td>{{ BlockHash }}</td>
+            <td>{{ BlockNumber }}</td>
+            <td>{{ TransactionIndex }}</td>
+            <td>{{ TransactionHash }}</td>
+            <td>{{ GasUsed }}</td>
+            
+          </tr>
+        </tbody>
+      </table>
+    </div>    
+</body>
 </html>

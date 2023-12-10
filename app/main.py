@@ -37,9 +37,15 @@ async def read_root(request: Request):
 async def update_patient(request: Request,patient_id: Annotated[str, Form()], update_message: Annotated[str, Form()], contract=Depends(get_contract)):
     try:
         print(patient_id, update_message)
-        tx_hash = contract.functions.updatePatient(patient_id,update_message).transact({'from': w3.eth.accounts[0]})  # Update with your Ethereum account address
+        tx_hash = contract.functions.updatePatient(patient_id,update_message).transact({'from': w3.eth.accounts[0]})
         tx_receipt = w3.eth.get_transaction_receipt(tx_hash)
-
-        return templates.TemplateResponse("result.html",{"request": request,"status": "success", "result": tx_hash.hex()})
+     
+        return templates.TemplateResponse("result.html",{"request": request,
+                                                         "status": "success", 
+                                                         "TransactionHash": tx_hash.hex(),
+                                                         "BlockHash": tx_receipt.get('blockHash'),
+                                                         "BlockNumber": tx_receipt.get('blockNumber'),
+                                                         "TransactionIndex": tx_receipt.get('transactionIndex'),
+                                                         "GasUsed": tx_receipt.get('gasUsed')})
     except Exception as e:
         return {"status": "error", "error_message": str(e)}
