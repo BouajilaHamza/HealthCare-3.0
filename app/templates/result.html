@@ -6,27 +6,30 @@
 </head>
 <body>
     <h1>Healthcare Blockchain - Patient Update - Results</h1>
-   
+   <h1>{{ error_message }}</h1>
 
     <div class="table-responsive-vertical shadow-z-1">
     <table id="table" class="table table-hover table-mc-light-blue">
         <thead>
           <tr>
-            <th> BlockHash </th>
-            <th> BlockNumber </th>
-            <th> TransactionIndex </th>
-            <th> TransactionHash</th>
-            <th> GasUsed</th>
+            <th> ID </th>
+            <th> First Name </th>
+            <th> Last Name </th>
+            <th> Age </th>
+            <th> Gender</th>
+            <th> Illness</th>
+            <th> Message</th>
           </tr>
         </thead>
         <tbody>
           <tr>
-            <td>{{ BlockHash }}</td>
-            <td>{{ BlockNumber }}</td>
-            <td>{{ TransactionIndex }}</td>
-            <td>{{ TransactionHash }}</td>
-            <td>{{ GasUsed }}</td>
-            
+            <td>{{ ID }}</td>
+            <td>{{ First_Name }}</td>
+            <td>{{ Last_Name }}</td>
+            <td>{{ Age }}</td>
+            <td>{{ Gender }}</td>
+            <td>{{ Illness }}</td>
+            <td>{{ Message }}</td>
           </tr>
         </tbody>
       </table>

@@ -6,17 +6,134 @@
     <title>Healthcare Blockchain</title>
 </head>
 <body>
-    <h1>Healthcare Blockchain - Patient Update</h1>
-    <form id="form-id" action="/update_patient" method="post">
+    <h1>Healthcare Blockchain - Patient Updates</h1>
+
+
+    <h2>Add Patient</h2>
+    <form id="form_add" action="/add_patient" method="post">
+
         <label for="patient_id">Patient ID</label>
         <br>
         <input type="text" id="patient_id" name="patient_id" required><br>
         <br>
-        <label for="update_message">Update Message</label>
+
+
+        <label for="first_name">First Name</label>
         <br>
-        <textarea id="update_message" name="update_message" required></textarea><br>
+        <input type="text" id="first_name" name="first_name" required><br>
         <br>
-        <button type="submit">Submit Update</button>
+
+
+
+        <label for="last_name">Last Name</label>
+        <br>
+        <input type="text" id="last_name" name="last_name" required><br>
+        <br>
+
+
+
+        <label for="age">Patient Age</label>
+        <br>
+        <input type="text" id="age" name="age" required></input>
+        <br>
+        <br>
+
+
+
+        <label for="gender">Gender</label>
+        <br>
+        <input type = "radio" name="gender" value="Male" checked>
+        <label for="male">Male</label>
+        <br>
+        <input type = "radio" name="gender" value="Female"> 
+        <label for="female">Female</label>
+        <br>
+        <br>
+
+
+        <label for="illness">Illnes</label>
+        <br>
+        <input type = "text" id="illness" name="illness" ></input>
+        <br>
+        <br>
+
+
+        <label for="message">Message</label>
+        <br>
+        <textarea id="message" name="message"></textarea>
+        <br>
+        <br>
+        <div class="container">
+        <button type="submit">Add Patient</button>
+        </div>
+    </form>
+
+
+
+
+
+    <h2>Update Patient</h2>
+    <form id="form_update" action="/update_patient" method="post">
+
+        <label for="patient_id">Patient ID</label>
+        <br>
+        <input type="text" id="patient_id" name="patient_id" required><br>
+        <br>
+
+
+        <label for="first_name">First Name</label>
+        <br>
+        <input type="text" id="first_name" name="first_name" required><br>
+        <br>
+
+
+
+        <label for="last_name">Last Name</label>
+        <br>
+        <input type="text" id="last_name" name="last_name" required><br>
+        <br>
+
+
+
+        <label for="age">Patient Age</label>
+        <br>
+        <input type="text" id="age" name="age" required></input>
+        <br>
+        <br>
+
+
+        <label for="illness">Illnes</label>
+        <br>
+        <input type = "text" id="illness" name="illness" ></input>
+        <br>
+        <br>
+
+
+        <label for="message">Message</label>
+        <br>
+        <textarea id="message" name="message"></textarea>
+        <br>
+        <br>
+        <div class="container">
+        <button type="submit">Update Patient</button>
+        </div>
+    </form>
+
+
+
+
+    
+    <h2>Get Patient</h2>
+    <form id="form_get_patient" action="/get_patient" method="post">
+
+        <label for="patient_id">Patient ID</label>
+        <br>
+        <input type="text" id="patient_id" name="patient_id" required><br>
+        <br>
+        <br>
+        <div class="container">
+        <button type="submit">Get Patient</button>
+        </div>
     </form>
 </body>
 </html>

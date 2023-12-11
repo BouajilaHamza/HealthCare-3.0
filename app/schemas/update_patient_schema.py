@@ -1,10 +1,20 @@
 from pydantic import BaseModel
 from fastapi import Form
-
+from enum import Enum
 class PatientUpdate(BaseModel):
     patient_id: str = Form(...)
-    update_message: str = Form(...)
+    first_name: str = Form(...)
+    last_name: str = Form(...)
+    age : int = Form(...)
+    gender : str = Form(...)
+    illness : str = Form(...)
+    message: str = Form(...)
+    print(patient_id, message)
+
+
+class Gender(Enum):
+    Male="Male"
+    Female="Female"
     
-    @classmethod
-    def as_form(cls, patient_id: str = Form(...), update_message: str = Form(...)) -> 'PatientUpdate':
-        return cls(patient_id=patient_id, update_message=update_message)
+    def __str__(self) -> str:
+        return str(self.value)

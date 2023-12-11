@@ -4,55 +4,53 @@ Le patient est supervisé par le réseau médical (à distance). A chaque interv
 
 
 ### Remix Solidity IDE (https://remix.ethereum.org/)
+
+### Ganache (https://www.trufflesuite.com/ganache)
+
+### Environment Dev Ganache
+
+### 
 ## Smart Contarct
 ```solidity
 // SPDX-License-Identifier: GPL-3.0
 
 pragma solidity >=0.8.2 <0.9.0;
 contract PatientContract {
-    struct Update {
+    struct Patient {
+        string PatientId;
+        string First_Name;
+        string Last_Name;
+        int32 age;
+        string maladie;
+        string gender;
         string message;
-        uint256 timestamp;
     }
 
-    mapping(string => Update[]) public patientUpdates;
+    mapping(string => Patient) public patientUpdates;
 
     // Constructor to initialize the contract
     constructor() {
         // You can add any initialization logic here
     }
 
-    function updatePatient(string memory patientId, string memory updateMessage) public returns (bool) {
-        tryUpdatePatient(patientId, updateMessage);
+    function addPatent(string memory patientid ,string memory firstname , string memory lastname ,int32  age,string memory maladie , string memory gender,string memory message) public {
+        Patient memory
+        p = Patient(patientid,firstname,lastname,age,maladie,gender,message);
+        patientUpdates[patientid] =p;
+    }
+
+    function getPatientInfos(string memory patientId) public view returns (Patient memory){
+        return patientUpdates[patientId];
+    }
+
+
+    function updatePatient(string memory patientId, string memory updateMessage,int32 newage) public returns (bool) {
+        Patient memory p = patientUpdates[patientId];
+        p.message = updateMessage;
+        p.age = newage;
+        patientUpdates[patientId] = p;
         return true;
     }
 
-    function tryUpdatePatient(string memory patientId, string memory updateMessage) internal {
-        // Manually set a gas limit, adjust as needed
-        uint256 gasLimit = 2000000;
-
-        // Estimate gas consumption for the updatePatientInternal function
-        uint256 gasEstimation = gasleft();
-        updatePatientInternal(patientId, updateMessage);
-        gasEstimation = gasEstimation - gasleft();
-
-        // Check if gas consumption is below the specified limit
-        require(gasEstimation <= gasLimit, "Gas limit exceeded");
-
-        // Update patient with the actual gas limit
-        updatePatientInternal(patientId, updateMessage);
-    }
-
-    function updatePatientInternal(string memory patientId, string memory updateMessage) internal {
-        Update memory newUpdate = Update({
-            message: updateMessage,
-            timestamp: block.timestamp
-        });
-        patientUpdates[patientId].push(newUpdate);
-    }
-
-    function getPatientUpdatesCount(string memory patientId) public view returns (uint256) {
-        return patientUpdates[patientId].length;
-    }
 }
 ```

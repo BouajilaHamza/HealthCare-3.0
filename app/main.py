@@ -7,8 +7,8 @@ from web3 import Web3
 from app.models.model import PatientUpdate
 from app.constants import contract_abi
 from app.schemas.update_patient_schema import PatientUpdate
-
-
+import numpy as np
+from fastapi.encoders import jsonable_encoder
 
 
 
@@ -17,11 +17,9 @@ app.mount("/static", StaticFiles(directory="app/static"), name="static")
 
 templates = Jinja2Templates(directory="app/templates")
 
-# Web3 configuration
 w3 = Web3(Web3.HTTPProvider('http://localhost:7545'))  # Update with your Ganache or private blockchain URL
 
-# Smart Contract Address and ABI
-contract_address = "0xfb547a7979e0Dc5b91f09D8FCcA12eeA09535ed5"  # Update with your deployed contract address
+contract_address = "0x5389f3C20cDcdDAF1D83fd28dc36645aAE08fEd4"  # Update with your deployed contract address
 
 
 contract = w3.eth.contract(address=contract_address, abi=contract_abi)
@@ -29,23 +27,60 @@ contract = w3.eth.contract(address=contract_address, abi=contract_abi)
 def get_contract():
     return contract
 
+
 @app.get("/", response_class=HTMLResponse)
 async def read_root(request: Request):
     return templates.TemplateResponse("index.html", {"request": request})
 
-@app.post("/update_patient",response_class=HTMLResponse)
-async def update_patient(request: Request,patient_id: Annotated[str, Form()], update_message: Annotated[str, Form()], contract=Depends(get_contract)):
-    try:
-        print(patient_id, update_message)
-        tx_hash = contract.functions.updatePatient(patient_id,update_message).transact({'from': w3.eth.accounts[0]})
-        tx_receipt = w3.eth.get_transaction_receipt(tx_hash)
-     
-        return templates.TemplateResponse("result.html",{"request": request,
-                                                         "status": "success", 
-                                                         "TransactionHash": tx_hash.hex(),
-                                                         "BlockHash": tx_receipt.get('blockHash'),
-                                                         "BlockNumber": tx_receipt.get('blockNumber'),
-                                                         "TransactionIndex": tx_receipt.get('transactionIndex'),
-                                                         "GasUsed": tx_receipt.get('gasUsed')})
+
+
+@app.post("/add_patient",response_class=HTMLResponse)
+async def add_patient(  request: Request,
+                        patient_id: Annotated[str, Form()],
+                        first_name: Annotated[str, Form()],
+                        last_name: Annotated[str, Form()],
+                        age: Annotated[int, Form()],
+                        gender: Annotated[str, Form()],
+                        illness:Annotated[str , Form()],
+                        message: Annotated[str, Form()], 
+                        contract=Depends(get_contract)):
+    try:        
+        tx_hash = contract.functions.addPatient(patient_id,first_name,last_name,age,gender,illness,message).transact({'from': w3.eth.accounts[1]})
+        patient_receipt = contract.functions.getPatientInfos(patient_id).call()
+        return templates.TemplateResponse("result.html",{"request": request,"status": "success", "PatientID": patient_receipt[0],"First_Name":patient_receipt[1],"Last_Name": patient_receipt[2],"Age": patient_receipt[3],"Gender":patient_receipt[4],"Illness":patient_receipt[5],"Message": patient_receipt[6]})
     except Exception as e:
-        return {"status": "error", "error_message": str(e)}
+        return  templates.TemplateResponse("result.html",{"request": request,"status": "error",  "error_message": str(e)})
+    
+    
+    
+
+
+@app.post("/update_patient",response_class=HTMLResponse)
+async def add_patient(  request: Request,
+                        patient_id: Annotated[str, Form()],
+                        first_name: Annotated[str, Form()],
+                        last_name: Annotated[str, Form()],
+                        age: Annotated[int, Form()],
+                        illness:Annotated[str , Form()],
+                        message: Annotated[str, Form()], 
+                        contract=Depends(get_contract)):
+    try:        
+        tx_hash = contract.functions.updatePatient(patient_id,first_name,last_name,age,illness,message).transact({'from': w3.eth.accounts[1]})
+        patient_receipt = contract.functions.getPatientInfos(patient_id).call()
+        return templates.TemplateResponse("result.html",{"request": request,"status": "success", "PatientID": patient_receipt[0],"First_Name":patient_receipt[1],"Last_Name": patient_receipt[2],"Age": patient_receipt[3],"Gender":patient_receipt[4],"Illness":patient_receipt[5],"Message": patient_receipt[6]})
+    except Exception as e:
+        return  templates.TemplateResponse("result.html",{"request": request,"status": "error", 
+                                                          "error_message": str(e)})
+
+
+
+@app.post("/get_patient",response_class=HTMLResponse)
+async def add_patient(  request: Request,
+                        patient_id: Annotated[str, Form()],
+                        contract=Depends(get_contract)):
+    try:        
+        patient_receipt = contract.functions.getPatientInfos(patient_id).call()
+        return templates.TemplateResponse("result.html",{"request": request,"status": "success", "PatientID": patient_receipt[0],"First_Name":patient_receipt[1],"Last_Name": patient_receipt[2],"Age": patient_receipt[3],"Gender":patient_receipt[4],"Illness":patient_receipt[5],"Message": patient_receipt[6]})
+    except Exception as e:
+        return  templates.TemplateResponse("result.html",{"request": request,"status": "error", 
+                                                          "error_message": str(e)})

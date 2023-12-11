@@ -1,4 +1,4 @@
-h1
+h1,h2
 {
     font-family: Arial, Helvetica, sans-serif;
     text-align: center;
@@ -25,11 +25,22 @@ button
     border: none;
     cursor: pointer;
     border-radius: 5px;
+    position: center; 
+    height: 50px;
+    width: 200px;
+    
 }
 
+.container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 100vw; 
+  }
 
+  
 
-input[type=text], textarea
+input,#message
 {
     font-family: Helvetica, sans-serif;
     font-size: 20px;
@@ -43,6 +54,7 @@ input[type=text], textarea
     border-radius: 5px;
 }
 
+
 td{
     font-family: Helvetica, sans-serif;
     font-size: 20px;
@@ -52,6 +64,8 @@ td{
     margin: 8px 0;
     border: 0px solid #ccc;
 }
+
+
 thead{
     font-family: Helvetica, sans-serif;
     font-size: 20px;
@@ -61,6 +75,9 @@ thead{
     margin: 8px 0;
     border: 0px solid #ccc;
 }
+
+
+
 table{
     font-family: Helvetica, sans-serif;
     font-size: 20px;
