@@ -1,7 +1,9 @@
-h1,h2
+h1,.Form_Title
 {
     font-family: Arial, Helvetica, sans-serif;
     text-align: center;
+    font-size: 400px !important;
+    position: center;
 }
 
 

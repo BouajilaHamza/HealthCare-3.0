@@ -14,12 +14,13 @@ from fastapi.encoders import jsonable_encoder
 
 app = FastAPI()
 app.mount("/static", StaticFiles(directory="app/static"), name="static")
+app.mount("/assets", StaticFiles(directory="app/assets"), name="assets")
 
 templates = Jinja2Templates(directory="app/templates")
 
 w3 = Web3(Web3.HTTPProvider('http://localhost:7545'))  # Update with your Ganache or private blockchain URL
 
-contract_address = "0x5389f3C20cDcdDAF1D83fd28dc36645aAE08fEd4"  # Update with your deployed contract address
+contract_address = "0x440c50002e510e34BB02c307bE4379604B36a02A"  # Update with your deployed contract address
 
 
 contract = w3.eth.contract(address=contract_address, abi=contract_abi)
@@ -56,7 +57,7 @@ async def add_patient(  request: Request,
 
 
 @app.post("/update_patient",response_class=HTMLResponse)
-async def add_patient(  request: Request,
+async def update_patient(  request: Request,
                         patient_id: Annotated[str, Form()],
                         first_name: Annotated[str, Form()],
                         last_name: Annotated[str, Form()],
@@ -67,7 +68,7 @@ async def add_patient(  request: Request,
     try:        
         tx_hash = contract.functions.updatePatient(patient_id,first_name,last_name,age,illness,message).transact({'from': w3.eth.accounts[1]})
         patient_receipt = contract.functions.getPatientInfos(patient_id).call()
-        return templates.TemplateResponse("result.html",{"request": request,"status": "success", "PatientID": patient_receipt[0],"First_Name":patient_receipt[1],"Last_Name": patient_receipt[2],"Age": patient_receipt[3],"Gender":patient_receipt[4],"Illness":patient_receipt[5],"Message": patient_receipt[6]})
+        return templates.TemplateResponse("result.html",{"request": request,"status": "success", "PatientID": patient_receipt[0],"First_Name":patient_receipt[1],"Last_Name": patient_receipt[2],"Age": patient_receipt[3],"Gender":patient_receipt[5],"Illness":patient_receipt[4],"Message": patient_receipt[6]})
     except Exception as e:
         return  templates.TemplateResponse("result.html",{"request": request,"status": "error", 
                                                           "error_message": str(e)})
@@ -75,12 +76,19 @@ async def add_patient(  request: Request,
 
 
 @app.post("/get_patient",response_class=HTMLResponse)
-async def add_patient(  request: Request,
-                        patient_id: Annotated[str, Form()],
-                        contract=Depends(get_contract)):
+async def get_patient(request: Request,
+                         patient_id: Annotated[str, Form()],
+                         contract=Depends(get_contract)):
     try:        
         patient_receipt = contract.functions.getPatientInfos(patient_id).call()
-        return templates.TemplateResponse("result.html",{"request": request,"status": "success", "PatientID": patient_receipt[0],"First_Name":patient_receipt[1],"Last_Name": patient_receipt[2],"Age": patient_receipt[3],"Gender":patient_receipt[4],"Illness":patient_receipt[5],"Message": patient_receipt[6]})
+        return templates.TemplateResponse("result.html",{"request": request,"status": "success", 
+                                                         "PatientID": patient_receipt[0],
+                                                         "First_Name":patient_receipt[1],
+                                                         "Last_Name": patient_receipt[2],
+                                                         "Age": patient_receipt[3],
+                                                         "Gender":patient_receipt[4],
+                                                         "Illness":patient_receipt[5],
+                                                         "Message": patient_receipt[6]})
     except Exception as e:
         return  templates.TemplateResponse("result.html",{"request": request,"status": "error", 
                                                           "error_message": str(e)})

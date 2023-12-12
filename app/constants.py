@@ -5,6 +5,98 @@ contract_abi =  [
 		"type": "constructor"
 	},
 	{
+		"anonymous": "false",
+		"inputs": [
+			{
+				"indexed": "false",
+				"internalType": "string",
+				"name": "patientid",
+				"type": "string"
+			},
+			{
+				"indexed": "false",
+				"internalType": "string",
+				"name": "newfirstname",
+				"type": "string"
+			},
+			{
+				"indexed": "false",
+				"internalType": "string",
+				"name": "newlastname",
+				"type": "string"
+			},
+			{
+				"indexed": "false",
+				"internalType": "int256",
+				"name": "newage",
+				"type": "int256"
+			},
+			{
+				"indexed": "false",
+				"internalType": "string",
+				"name": "newmaladie",
+				"type": "string"
+			},
+			{
+				"indexed": "false",
+				"internalType": "string",
+				"name": "newmessage",
+				"type": "string"
+			}
+		],
+		"name": "PatientUpdated",
+		"type": "event"
+	},
+	{
+		"inputs": [
+			{
+				"internalType": "string",
+				"name": "",
+				"type": "string"
+			}
+		],
+		"name": "Patients",
+		"outputs": [
+			{
+				"internalType": "string",
+				"name": "PatientId",
+				"type": "string"
+			},
+			{
+				"internalType": "string",
+				"name": "First_Name",
+				"type": "string"
+			},
+			{
+				"internalType": "string",
+				"name": "Last_Name",
+				"type": "string"
+			},
+			{
+				"internalType": "int256",
+				"name": "age",
+				"type": "int256"
+			},
+			{
+				"internalType": "string",
+				"name": "maladie",
+				"type": "string"
+			},
+			{
+				"internalType": "string",
+				"name": "gender",
+				"type": "string"
+			},
+			{
+				"internalType": "string",
+				"name": "message",
+				"type": "string"
+			}
+		],
+		"stateMutability": "view",
+		"type": "function"
+	},
+	{
 		"inputs": [
 			{
 				"internalType": "string",
@@ -44,6 +136,19 @@ contract_abi =  [
 		],
 		"name": "addPatient",
 		"outputs": [],
+		"stateMutability": "nonpayable",
+		"type": "function"
+	},
+	{
+		"inputs": [],
+		"name": "getAllPatients",
+		"outputs": [
+			{
+				"internalType": "string[]",
+				"name": "",
+				"type": "string[]"
+			}
+		],
 		"stateMutability": "nonpayable",
 		"type": "function"
 	},
@@ -106,12 +211,31 @@ contract_abi =  [
 	{
 		"inputs": [
 			{
+				"internalType": "uint256",
+				"name": "",
+				"type": "uint256"
+			}
+		],
+		"name": "patientIDs",
+		"outputs": [
+			{
 				"internalType": "string",
 				"name": "",
 				"type": "string"
 			}
 		],
-		"name": "patientUpdates",
+		"stateMutability": "view",
+		"type": "function"
+	},
+	{
+		"inputs": [
+			{
+				"internalType": "uint256",
+				"name": "",
+				"type": "uint256"
+			}
+		],
+		"name": "patients",
 		"outputs": [
 			{
 				"internalType": "string",
@@ -156,18 +280,33 @@ contract_abi =  [
 		"inputs": [
 			{
 				"internalType": "string",
-				"name": "patientId",
+				"name": "patientid",
 				"type": "string"
 			},
 			{
 				"internalType": "string",
-				"name": "updateMessage",
+				"name": "newfirstname",
+				"type": "string"
+			},
+			{
+				"internalType": "string",
+				"name": "newlastname",
 				"type": "string"
 			},
 			{
 				"internalType": "int256",
 				"name": "newage",
 				"type": "int256"
+			},
+			{
+				"internalType": "string",
+				"name": "newmaladie",
+				"type": "string"
+			},
+			{
+				"internalType": "string",
+				"name": "newmessage",
+				"type": "string"
 			}
 		],
 		"name": "updatePatient",

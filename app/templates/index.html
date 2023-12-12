@@ -4,12 +4,15 @@
     <link href="{{ url_for('static', path='/css/styles.css') }}" rel="stylesheet">
     <script src="{{ url_for('static', path='/js/script.js') }}"></script>
     <title>Healthcare Blockchain</title>
+    <link rel="icon" type="image/jpeg" href="{{ url_for('assets', path='healthcarelogo.jpeg') }}">
 </head>
 <body>
-    <h1>Healthcare Blockchain - Patient Updates</h1>
+    <h1 class = "Title">Healthcare Blockchain - Patient Updates</h1>
 
-
-    <h2>Add Patient</h2>
+    <br>
+    <br>
+    <h2 class="Form_Title">Add Patient</h2>
+    <br>
     <form id="form_add" action="/add_patient" method="post">
 
         <label for="patient_id">Patient ID</label>
@@ -70,9 +73,10 @@
 
 
 
+    <br>
+    <hr>
 
-
-    <h2>Update Patient</h2>
+    <h2 class="Form_Title">Update Patient</h2>
     <form id="form_update" action="/update_patient" method="post">
 
         <label for="patient_id">Patient ID</label>
@@ -121,9 +125,10 @@
 
 
 
-
+    <br>
+    <hr>
     
-    <h2>Get Patient</h2>
+    <h2 class="Form_Title">Get Patient</h2>
     <form id="form_get_patient" action="/get_patient" method="post">
 
         <label for="patient_id">Patient ID</label>
