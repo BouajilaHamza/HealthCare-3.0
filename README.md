@@ -17,12 +17,12 @@ Le patient est supervisé par le réseau médical (à distance). A chaque interv
 - copy/paste address contract in file main.py
 
 ### Install Environment Python
-```bash pip install -r requirements.txt```
+```pip install -r requirements.txt```
 
 ### Run Python Script
 - open terminal
 - run command 
-```bash uvicorn main:app --reload```
+```uvicorn main:app --reload```
 - open browser
 - go to url http://127.0.0.1:8000
 
